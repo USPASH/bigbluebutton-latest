@@ -1,4 +1,4 @@
-package common
+hiypackage common
 
 import (
 	"sync"
