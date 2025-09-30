@@ -21,6 +21,7 @@ import Tooltip from '/imports/ui/components/common/tooltip/component';
 import SessionDetailsModal from '/imports/ui/components/session-details/component';
 import Icon from '/imports/ui/components/common/icon/icon-ts/component';
 import getStorageSingletonInstance from '../../services/storage';
+import RaiseHandButtonContainer from '/imports/ui/components/actions-bar/raise-hand-button/container';
 
 const intlMessages = defineMessages({
   toggleUserListLabel: {
@@ -189,6 +190,7 @@ class NavBar extends Component {
       breakoutNum,
       breakoutName,
       meetingName,
+      // isRaiseHandEnabled,
     } = this.props;
 
     if (breakoutNum && breakoutNum > 0) {
@@ -317,6 +319,7 @@ class NavBar extends Component {
       isDirectLeaveButtonEnabled,
       isMeteorConnected,
       hideTopRow,
+      isRaiseHandEnabled
     } = this.props;
 
     const { isModalOpen } = this.state;
@@ -337,12 +340,11 @@ class NavBar extends Component {
       && selectedLayout !== LAYOUT_TYPE.PRESENTATION_ONLY
       && selectedLayout !== LAYOUT_TYPE.PARTICIPANTS_AND_CHAT_ONLY
       && selectedLayout !== LAYOUT_TYPE.MEDIA_ONLY;
-    const shouldShowNavbar = LAYOUT_TYPE.PLUGINS_ONLY !== selectedLayout;
 
     const APP_CONFIG = window.meetingClientSettings?.public?.app;
     const enableTalkingIndicator = APP_CONFIG?.enableTalkingIndicator;
 
-    return shouldShowNavbar && (
+    return (
       <Styled.Navbar
         id="Navbar"
         style={
@@ -417,6 +419,8 @@ class NavBar extends Component {
               {renderPluginItems(rightPluginItems)}
               {ConnectionStatusService.isEnabled() ? <ConnectionStatusButton /> : null}
               {ConnectionStatusService.isEnabled() ? <ConnectionStatus /> : null}
+              {isRaiseHandEnabled && <RaiseHandButtonContainer />}
+              
               {isDirectLeaveButtonEnabled && isMeteorConnected
                 ? <LeaveMeetingButtonContainer amIModerator={amIModerator} /> : null}
               <OptionsDropdownContainer

@@ -17,6 +17,7 @@ import RaiseHandButtonContainer from '/imports/ui/components/actions-bar/raise-h
 import Selector from '/imports/ui/components/common/selector/component';
 import ToggleGroup from '/imports/ui/components/common/toggle-group/component';
 import Separator from '/imports/ui/components/common/separator/component';
+import LeaveMeetingButtonContainer from '../nav-bar/leave-meeting-button/container';
 
 const intlMessages = defineMessages({
   actionsBarLabel: {
@@ -162,12 +163,11 @@ class ActionsBar extends PureComponent {
       && selectedLayout !== LAYOUT_TYPE.PARTICIPANTS_AND_CHAT_ONLY;
     const shouldShowVideoButton = selectedLayout !== LAYOUT_TYPE.PRESENTATION_ONLY
       && selectedLayout !== LAYOUT_TYPE.PARTICIPANTS_AND_CHAT_ONLY;
-    const shouldRenderActionBar = selectedLayout !== LAYOUT_TYPE.PLUGINS_ONLY;
 
     const shouldShowOptionsButton = (isPresentationEnabled && isThereCurrentPresentation)
       || isSharingVideo || hasScreenshare || isSharedNotesPinned;
 
-    return shouldRenderActionBar && (
+    return (
       <Styled.ActionsBarWrapper
         id="ActionsBar"
         role="region"
@@ -231,7 +231,7 @@ class ActionsBar extends PureComponent {
               />
             )}
             {isReactionsButtonEnabled && this.renderReactionsButton()}
-            {isRaiseHandEnabled && <RaiseHandButtonContainer />}
+            {/* {isRaiseHandEnabled && <RaiseHandButtonContainer />} */}
             {this.renderPluginsActionBarItems(ActionsBarPosition.RIGHT)}
           </Styled.Center>
           <Styled.Right>
@@ -254,6 +254,10 @@ class ActionsBar extends PureComponent {
                   />
                 )
                 : null}
+
+            </Styled.Gap>
+            <Styled.Gap>
+              <LeaveMeetingButtonContainer amIModerator = {false}/>
             </Styled.Gap>
           </Styled.Right>
         </Styled.ActionsBar>
