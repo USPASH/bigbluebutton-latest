@@ -33,7 +33,7 @@ public:
     displayBbbServerVersion: true
     copyright: '©2025 Jehat Inc.'
     html5ClientBuild: HTML5_CLIENT_VERSION
-    helpLink: https://bigbluebutton.org/html5/
+    helpLink: https://meet.jehat.sa
     delayForUnmountOfSharedNote: 120000
     bbbTabletApp:
       enabled: true
